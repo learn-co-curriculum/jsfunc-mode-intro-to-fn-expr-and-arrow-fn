@@ -3,8 +3,8 @@ JavaScript Arrow Functions
 
 ## Problem Statement
 
-You're familiar by now with the standard style of declaring functions in
-JavaScript.
+The original style for declaring functions in JavaScript is the _function
+declaration_.
 
 ```js
 function foo() {
@@ -12,10 +12,8 @@ function foo() {
 }
 ```
 
-But JavaScript has two other ways to write functions that are common in
-iteration and in writing event-handling code ("on click of this button, do
-that"). This lesson will teach those styles before you learn advanced iteration
-or event creation so that the syntax doesn't get in our way.
+But JavaScript has two other ways to write functions: the _function expression_
+and the _arrow function_. None of these is more correct or better than others.
 
 ## Objectives
 
@@ -41,8 +39,9 @@ let foo = function() {
 }
 ```
 
-The `function() {...}` is called a _function expression_. The best way to
-understand what a function expression is is by analogy.
+The `function() {...}` to the right of the assignment operator (`=`) is called
+a _function expression_. The best way to understand what a function expression
+is is by analogy.
 
 ```js
 let sum = 1 + 1
@@ -64,19 +63,28 @@ let foo = function() {
 ```
 
 EVALUATE the expression `function() { return 'bar' }`, RETURNING a thing that
-can be called and ASSIGN it to the variable `foo`. Since `foo` holds a callable
-thing, it can be called with `foo()`.
-
-The function expression to the right of `=`  is known as "an anonymous
+can be called and ASSIGN it to the variable `foo`. The function expression
+(again, the thing to the right of `=`) is known as "an anonymous
 function." It doesn't have a name associated with it like you see in a
-_function declaration_. However, when we assign an anonymous function to a name
-(that is, a variable), we now have a "named function," a function that's no
-longer anonymous.
+_function declaration_.
+
+However, when we assign an anonymous function to a name (that is, a variable),
+we have name that points to a callable thing. We could call this anonymous
+function by invoking `foo()`. That anonymous function is now, for all
+reasonable purposes, named `foo`.
 
 There are a few subtle differences between _function declarations_ and
 _function expressions_, but they are very minute. Neither is really better than
 the other. JavaScript supports variety. Neither is better or more preferred
 than the other.
+
+Try thinking about the following code. Will this work? Does it work? Try to
+explain to yourself what's happening using the words "anonymous function" and
+"`call`." If you need help, see IIFE in the Resources section below.
+
+```js
+(function() { console.log("Hello world") })()
+```
 
 ## Declare a Function Using An Arrow Function
 
@@ -85,23 +93,29 @@ They lobbied the ECMAScipt body for a way to write functions in a very short
 way. Here is the result, the "Arrow Function."
 
 ```js
-let add = (param1, param2) => param1 + param2
+let add = (parameter1, parameter2) => parameter1 + parameter2
 add(2,3) //=> 5
 ```
 
-Yes, this works! Really! This builds on the syntax of the named function we
-just covered. `add` is the name to which the following _anonymous function_ is
-assigned:
+Yes, this works! Really! This builds on the syntax of the _function expression_
+just covered. The arrow syntax just lets you cut out a some typing.
+
+`add` is the name to which the following _anonymous function_ is assigned, same
+as in the previous section:
 
 ```js
-(param1, param2) => param1 + param2
+(parameter1, parameter2) => parameter1 + parameter2
 ```
 
-This is a very short function! It adds `param1` and `param2`, and, without any
-braces, it **automatically** returns the result. Functions like this are very
-common in JavaScript's advanced iterators that we'll cover in a future lesson.
-If you have only _one_ parameter, JavaScript will even let you drop the `()`
-around the parameter:
+This is a very short function! It adds `parameter1` and `parameter2`.  Without
+any braces, arrow functions **automatically** return the result of the last
+expression.
+
+Functions like this are very common in JavaScript's iterator methods that we'll
+cover in a future lesson.
+
+As one final gift to programmers' fingers, if your arrow function has only
+_one_ parameter, JavaScript will let you drop the `()` around the parameter:
 
 ```js
 let twoAdder = x => x + 2;
@@ -112,55 +126,39 @@ If we need to do more work than return a mere single expression, we'll need
 `return`.
 
 ```js
-let sum = (param1, param2) => {
-  console.log(`Adding ${param1}`);
-  console.log(`Adding ${param2}`);
-  return param1 + param2;
+let sum = (parameter1, parameter2) => {
+  console.log(`Adding ${parameter1}`);
+  console.log(`Adding ${parameter2}`);
+  return parameter1 + parameter2;
 }
 sum(1,2) //=> 3
 ```
 
-At this point one might debate whether the "arrow function" is better than the
-"function expression." There's no solid answer here. Neither is "better" or
-"best practice."
-
 ## Describe Situations Where Arrow Functions Come In Handy
 
-In JavaScript, functions are 'first class objects'. They can be passed,
-declared, handled, and have properties and methods just like any other object.
-This is amazing and leads to some strange and beautiful code. Consider:
-
-```js
-const caller = fn = fn();
-caller(() => console.log("What is the Matrix?"))
-//=> LOG: What is the Matrix?
-```
-
-Whoa.
-
-As a foreshadow of advanced iteration in JavaScipt, we'll show the `.map()`
+As a preview of advanced iteration in JavaScipt, we'll show the `.map()`
 function iterates through one `Array`, passes each element to a function that's
 passed in as an argument, takes that functions return value, and stacks it into
 a new array.
 
 ```js
 const nums = [1,2,3];
-const squares = nums.map( x => x ** 2);
-const doubles = nums.map( x => x * 2);
+const squares = nums.map(x => x ** 2); //=> [2,4,6]
+const doubles = nums.map(x => x * 2); //=> [1,4,9]
 ```
 
 If all this math stuff seems a bit too, textbook-y, realize that a similar
 pattern could be done with DOM elements:
 
 finishedItems = overdueTodoItems.map( item => item.className = "complete" );
-header.innerText = `You fnished ${finishedItems.length} items!`;
+header.innerText = `You finished ${finishedItems.length} items!`;
 
 Or billing software:
 
-lapsedUserAccounts( u => sendBillTo(u.address) )
+lapsedUserAccounts.map( u => sendBillTo(u.address) )
 
-In subsequent lesson we'll show the power of arrow functions with certain
-special iterators.
+In a subsequent lesson we'll show the power of arrow functions with other
+iterator methods.
 
 ## Conclusion
 
@@ -173,4 +171,5 @@ full functions too!
 ## Resources
 
 - [MDN: Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
 
