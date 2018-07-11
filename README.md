@@ -89,7 +89,7 @@ explain to yourself what's happening using the words "anonymous function" and
 ## Declare a Function Using An Arrow Function
 
 Around 2015, developers got tired of typing `f-u-n-c-t-i-o-n` over and over.
-They lobbied the ECMAScipt body for a way to write functions in a very short
+They lobbied the ECMAScript body for a way to write functions in a very short
 way. Here is the result, the "Arrow Function."
 
 ```js
@@ -150,14 +150,18 @@ const doubles = nums.map(x => x * 2); //=> [1,4,9]
 If all this math stuff seems a bit too, textbook-y, realize that a similar
 pattern could be done with DOM elements:
 
+```js
 finishedItems = overdueTodoItems.map( item => item.className = "complete" );
 header.innerText = `You finished ${finishedItems.length} items!`;
+```
 
 Or billing software:
 
-lapsedUserAccounts.map( u => sendBillTo(u.address) )
+```js
+lapsedUserAccounts.map( u => sendBillTo(u.address) );
+```
 
-In a subsequent lesson we'll show the power of arrow functions with other
+In a subsequent lesson, we'll show the power of arrow functions with other
 iterator methods.
 
 ## Conclusion
@@ -172,4 +176,3 @@ full functions too!
 
 - [MDN: Arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 - [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE)
-
